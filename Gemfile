@@ -48,6 +48,7 @@ gem "bootsnap", require: false
 gem "cpf_cnpj"
 gem 'devise'
 gem "devise-i18n"
+gem "faker"
 gem "devise-bootstrap5"
 
 group :development, :test do

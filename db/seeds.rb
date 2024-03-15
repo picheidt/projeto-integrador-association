@@ -8,10 +8,32 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+require 'faker'
+require 'cpf_cnpj'
+
+# Person.destroy_all
 User.destroy_all
+# Debt.destroy_all
 
-User.create email: 'admin@admin.com', password: '111111'
 
-puts "Usuário criado:"
-puts "login admin@admin.com"
-puts "111111"
+# User.create email: 'admin@admin.com', password: '111111'
+
+# 50.times do 
+#     FactoryBot.create(:user)
+# end
+
+# 100.times do
+#     FactoryBot.create(:person) do |person|
+#         person.user = User.order('random()').first
+#     end
+# end
+
+# 500.times do 
+#     FactoryBot.create(:debt) do |debt|
+#         debt.person = Person.order('random()').first
+#     end
+# end
+
+# puts "Usuário criado:"
+# puts "login admin@admin.com"
+# puts "111111"

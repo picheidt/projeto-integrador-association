@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :debt do
     person
-    amount { 99 }
-    observation { 'any-text' }
+    amount { Faker::Number.decimal(l_digits: 2) }
+    observation { Faker::Lorem.sentence }
   end
 end
