@@ -11,29 +11,29 @@
 require 'faker'
 require 'cpf_cnpj'
 
-# Person.destroy_all
+puts "Destroying existing records..."
 User.destroy_all
-# Debt.destroy_all
+Debt.destroy_all
+Person.destroy_all
 
+User.create email: 'admin@admin.com', password: '111111'
 
-# User.create email: 'admin@admin.com', password: '111111'
+puts "Usuário criado:"
+puts "login admin@admin.com"
+puts "111111"
 
-# 50.times do 
-#     FactoryBot.create(:user)
-# end
+1000.times do |counter|
+  puts "Creating user #{counter}"
+  FactoryBot.create(:user)
+end
 
-# 100.times do
-#     FactoryBot.create(:person) do |person|
-#         person.user = User.order('random()').first
-#     end
-# end
+3000.times do |counter|
+  puts "Inserting Person #{counter}"
 
-# 500.times do 
-#     FactoryBot.create(:debt) do |debt|
-#         debt.person = Person.order('random()').first
-#     end
-# end
+  person = FactoryBot.create(:person, user: User.order('random()').first)
 
-# puts "Usuário criado:"
-# puts "login admin@admin.com"
-# puts "111111"
+  5.times do |debt_counter|
+    puts "Insertin Debt #{debt_counter}"
+    FactoryBot.create(:debt, person: person)
+  end
+end
