@@ -6,6 +6,22 @@ class Person < ApplicationRecord
   validates :name, :national_id, presence: true
   validates :national_id, uniqueness: true
   validate :cpf_or_cnpj
+
+  # TODO: refactor me
+  #
+  # - improve performance using SQL
+  # - sum payments
+  # - rename to "balance"
+  def total_debts
+    total = 0
+
+    debts.each do |debt|
+      total -= debt.amount
+    end
+
+    total
+  end
+  
   self.per_page = 10
 
   private
