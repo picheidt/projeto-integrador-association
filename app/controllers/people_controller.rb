@@ -15,13 +15,13 @@ class PeopleController < ApplicationController
       @active = true
     end
 
-    @people = Person.where(active: @active).paginate(page: params[:page]).order(id: :asc)
+    @people = Person.includes(:user).where(active: @active).paginate(page: params[:page]).order(id: :asc)
   end
 
   # GET /people/search?q=a_name
   # Returns an HTML for autocomplete
   def search
-    @people = Person.where(active: true).
+    @people = Person.includes(:user).where(active: true).
       where("UPPER(name) LIKE ?", "#{params[:q].upcase}%").
       order(:name).
       limit(10)
