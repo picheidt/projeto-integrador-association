@@ -32,8 +32,10 @@ end
 
   person = FactoryBot.create(:person, user: User.order('random()').first)
 
-  5.times do |debt_counter|
-    puts "Insertin Debt #{debt_counter}"
+  5.times do |counter|
+    puts "Insertin Debt #{counter}"
     FactoryBot.create(:debt, person: person)
+    puts "Insertin Payment #{counter}"
+    FactoryBot.create(:payment, person: person)
   end
 end
