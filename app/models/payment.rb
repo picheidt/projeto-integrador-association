@@ -9,8 +9,7 @@ class Payment < ApplicationRecord
   private
 
   def update_cache_balance
-    new_balance = person.balance() + amount
-    Rails.cache.write("#{person.id}/balance", new_balance)
+    person.update_cache_balance(amount)
   end
 
 end
