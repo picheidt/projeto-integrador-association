@@ -8,13 +8,10 @@ class Person < ApplicationRecord
   validates :national_id, uniqueness: true
   validate :cpf_or_cnpj
   
-  # TODO: refactor me
-  #
-  # - improve performance using SQL
-  # - sum payments
-  # - rename to "balance"
   def balance
-    (debts.sum(:amount) * -1) + payments.sum(:amount)
+    Rails.cache.fetch("#{id}/balance", expires_in: 30.minutes) do 
+      payments.sum(:amount) - debts.sum(:amount)
+    end
   end
 
   self.per_page = 10
