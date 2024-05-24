@@ -22,12 +22,12 @@ puts "Usuário criado:"
 puts "login admin@admin.com"
 puts "111111"
 
-10.times do |counter|
+1000.times do |counter|
   puts "Creating user #{counter}"
   FactoryBot.create(:user)
 end
 
-30.times do |counter|
+3000.times do |counter|
   puts "Inserting Person #{counter}"
 
   person = FactoryBot.create(:person, user: User.order('random()').first)
