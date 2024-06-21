@@ -8,6 +8,7 @@ class Dashboard
             'last_debts' => last_debts(),
             'last_payments' => last_payments(),
             'my_people' => my_people(user: user),
+            'last_debt_bigger_than_100000' => debts_bigger_than_100000()
         }
 
         top_bottom = top_bottom_balance_people()
@@ -53,7 +54,7 @@ class Dashboard
 
     def my_people(user: current_user)
         Rails.cache.fetch("#{user.id}/my_people", expires_in: 10.minutes) do
-            Person.where(user: user).order(:created_at).limit(10)
+            Person.where(user: user).order(created_at: :desc).limit(10)
         end
     end
 
@@ -62,5 +63,9 @@ class Dashboard
             people = Person.all.order(balance: :desc)
             [people.first, people.last]
         end
+    end
+
+    def debts_bigger_than_100000
+        Debt.includes(:person).where('amount > ?', 100000).order(updated_at: :desc).limit(10)
     end
 end

@@ -1,5 +1,15 @@
 <h1>Dashboard</h1>
 
+<style>
+    .scrollable-table {
+        height: 363px;
+        overflow-y: scroll;
+    }
+    .table thead th {
+        text-align: center;
+    }
+</style>
+
 <div class="row">
   <div class="col-12">
     <div class="card">
@@ -41,7 +51,7 @@
 </div>
 
 <div class="row">
-  <div class="col-6">
+  <div class="col-md-4 col-sm-12">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Associados</h5>
@@ -50,7 +60,7 @@
     </div>
   </div>
 
-  <div class="col-6">
+  <div class="col-md-4 col-sm-12">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title">Meus últimos cadastros</h5>
@@ -62,6 +72,32 @@
       </div>
     </div>
   </div>
+  
+  <div class="col-md-4 col-sm-12">
+    <div class="card">
+      <div class="card-body scrollable-table">
+        <h2 class="text-center">Debt Records</h2>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <td>nome</td>
+              <td>quantia</td>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @dashboardData['last_debt_bigger_than_100000'].each do |debt| %>
+            <tr>
+              <td><%= debt.person.name %></td>
+              <td><%= debt.amount %></td>
+            </tr>
+          <% end %>  
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <div class="row mt-2">
