@@ -30,7 +30,14 @@ end
 3000.times do |counter|
   puts "Inserting Person #{counter}"
 
-  person = FactoryBot.create(:person, user: User.order('random()').first)
+  while not success
+    begin
+      person = FactoryBot.create(:person, user: User.order('random()').first)
+      success = true
+    rescue => e
+      puts "error"
+    end
+  end
 
   5.times do |counter|
     puts "Insertin Debt #{counter}"
